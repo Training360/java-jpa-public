@@ -5,7 +5,7 @@
 * Először nézd meg a videót! A videóban szereplő forráskódot a [demos](demos) könyvtárban találod. A slide-ok
   a JDBC esetén a [jdbc-slides.md](jdbc-slides.md) fájlban, JPA esetén
   a [jpa-slides.md](jpa-slides.md) fájlban vannak.
-* Old meg a videóhoz tartozó gyakorlati feladatot, mely JDBC esetén a [jdbc-gyak.md](jdbc-gyak.md) fájlban, JPA esetén
+* Oldd meg a videóhoz tartozó gyakorlati feladatot, mely JDBC esetén a [jdbc-gyak.md](jdbc-gyak.md) fájlban, JPA esetén
   a [jpa-gyak.md](jpa-gyak.md) fájlban van. 
   Dolgozhatsz ugyanabba a projektbe, a gyakorlati feladatok egymásra épülnek.
 
@@ -45,30 +45,44 @@
 * JPA Java EE-vel (`javaee`)
 * Deklaratív tranzakciókezelés (`transaction`)
 
-## Kivételkezelés
+## Bevezetés
 
-A videóban hibásan szerepelt, hogy úgy dobunk kivételt, hogy nem csomagoltuk be a forrás kivételt.
+A videókon MySQL adatbázis és HeidiSQL kliens szerepel. A tanfolyam során
+lehet használni MariaDB adatbázist, és bármilyen más klienst is,
+pl. DBeaver, SQuirreL SQL vagy az IntelliJ IDEA Ultimatte beépített klienst is.
 
-```java
-try {
+A HeidiSQL telepíthető Windowsra a [Chocolatey](https://chocolatey.org/)
+csomagkezelővel is.
 
-} catch (SQLException e) {
-   throw new IllegalStateException("Can not query"); // Helytelen, nincs megadva második paraméter
-}
+A HeidiSQL nyelve átállítható a _Tools/Preferences/General_ ablakban
+a _Application language_ comboboxban.
+
+A MySQL nem csak natívan telepíthető, de indítható Dockerben is:
+
+```shell
+docker run -d -e MYSQL_DATABASE=employees -e MYSQL_USER=employees -e MYSQL_PASSWORD=employees -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 --name employees-mysql mysql
 ```
 
-Ehelyett mindig csomagoljuk be az eredeti kivételt, tehát:
+Ugyanígy a MariaDB:
 
-```java
-try {
-
-} catch (SQLException e) {
-   throw new IllegalStateException("Can not query", e);
-}
+```shell
+docker run -d -e MYSQL_DATABASE=employees -e MYSQL_USER=employees -e MYSQL_PASSWORD=employees -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 --name employees-mariadb mariadb
 ```
 
+A videókban a fejlesztőeszköz IntelliJ IDEA Community, mely ingyenesen letölthető.
+A projekt során Maven build eszköz került felhasználásra.
 
-## MariaDB
+A videókban JUnit 4 került felhasználásra, azonban érdemes már a JUnit 5-öt használni.
+
+## Egyszerű JDBC adatmódosítás
+
+A séma létrehozható a ![create-schema.sql](jdbc/demos/create-schema.sql) fájlal. Amennyiben az adatbázis Dockerrel lett elindítva,
+erre nincs szükség, hiszen automatikusan létrehozza.
+
+Az `employees` tábla létrehozható a ![employees.sql](jdbc/demos/employees.sql) fájlal.
+
+
+### MariaDB
 
 Ha MySQL helyett MariaDB-t használunk, akkor választhatjuk a MariaDB
 JDBC drivert is, melynek neve MariaDB Connector/J.
@@ -89,15 +103,6 @@ Ekkor a függőség:
 jdbc:mariadb://localhost:3306/employees?useUnicode=true
 ```
 
-FIGYELEM! A `2.3.0` verzió azt mondja az adatbázisról, hogy MySQL, azonban a `2.4.0` verzió
-már azt mondja, hogy MariaDB. Ezt viszont nem ismeri fel a Flyway `5.2.4` verziója, a következő hiba keletkezik:
-
-```
-org.flywaydb.core.api.FlywayException: Unsupported Database: MariaDB 10.1
-```
-
-Ekkor térjünk vissza a `2.3.0` verzióra.
-
 A MariaDB JCBC driver esetén `MysqlDataSource` helyett `org.mariadb.jdbc.MariaDbDataSource` osztályt kell használnunk,
 azonban ennek metódusai `SQLException` kivételt dobnak.
 
@@ -113,7 +118,7 @@ catch (SQLException se) {
 }
 ```
 
-## JDBC url
+### MySQL JDBC url
 
 Abban az esetben, ha a legfrissebb MySQL JDBC drivert (connector) alkalmazzuk,
 azaz szerepel a `pom.xml` állományban (pl. `mysql:mysql-connector-java:8.0.15`),
@@ -155,7 +160,31 @@ Vagy térjünk vissza egy régebbi JDBC driverre:
 Ekkor azonban a `MysqlDataSource` csomagja más, az osztály neve minősítve
 `com.mysql.jdbc.jdbc2.optional.MysqlDataSource`.
 
-## Flyway
+### Kivételkezelés
+
+A videóban hibásan szerepelt, hogy úgy dobunk kivételt, hogy nem csomagoltuk be a forrás kivételt.
+
+```java
+try {
+
+} catch (SQLException e) {
+   throw new IllegalStateException("Can not query"); // Helytelen, nincs megadva második paraméter
+}
+```
+
+Ehelyett mindig csomagoljuk be az eredeti kivételt, tehát:
+
+```java
+try {
+
+} catch (SQLException e) {
+   throw new IllegalStateException("Can not query", e);
+}
+```
+
+## Alkalmazás architektúra
+
+### Flyway
 
 A Flyway videóban szereplő létrehozási módja az újabb verziókban deprecated, helyette használjuk ezt:
 
@@ -163,3 +192,14 @@ A Flyway videóban szereplő létrehozási módja az újabb verziókban deprecat
 Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 flyway.migrate();
 ```
+
+### MariaDB és Flyway inkompatibilitás
+
+FIGYELEM! A `2.3.0` verziójú MariaDB JDBC Driver azt mondja az adatbázisról, hogy MySQL, azonban a `2.4.0` verzió
+már azt mondja, hogy MariaDB. Ezt viszont nem ismeri fel a Flyway `5.2.4` verziója, a következő hiba keletkezik:
+
+```
+org.flywaydb.core.api.FlywayException: Unsupported Database: MariaDB 10.1
+```
+
+Ekkor térjünk vissza a `2.3.0` verzióra.
