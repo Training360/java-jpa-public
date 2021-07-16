@@ -23,10 +23,10 @@ Ekkor létrejön az `activitytracker` séma, és az `activitytracker` felhaszná
 
 * `id` - egyedi azonosító, egész szám
 * `startTime` - kezdési idő, `LocalDateTime`
-* `desc` - szöveges leírás
+* `description` - szöveges leírás (vigyázz, a `desc` foglalt szó SQL-ben)
 * `type` - felsorolásos típus, mely felveheti a következő értékeket: `BIKING`, `HIKING`, `RUNNING`, `BASKETBALL`
 
-Írj egy `activitytracker.ActivityTrackerMain` osztályt, mely egy `main()` metódusban, mely példányosít pár `ActivityTracker`
+Írj egy `activitytracker.ActivityTrackerMain` osztályt, mely egy `main()` metódusban, mely példányosít pár `Activity`
 példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisban hozd létre az `activities` táblát! Az `id` legyen `auto_generated`!
 A mezőnevek legyenek hasonlóak az osztály attribútumainak neveihez, azonban a szavakat aláhúzásjel (`_`) válassza el!
 
