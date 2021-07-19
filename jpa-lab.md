@@ -3,7 +3,7 @@
 A feladatokban egy úgynevezett Activity Tracker alkalmazás szimulációját kell megvalósítani,
 mellyel nyilvántarthatjuk sportolási tevékenységeinket, és lekérdezhetjük eredményeinket.
 
-## Egyszerű mentés és lekérdezés JPA-val
+## Egyszerű mentés JPA-val
 
 Ellenőrizd, hogy fut-e a MySQL szerver a lokális számítógépen (`localhost`)!
 Jelentkezz be `root` felhasználóval HeidiSQL kliens használatával, és futtasd le a következő
@@ -32,13 +32,18 @@ A mezőnevek legyenek hasonlóak az osztály attribútumainak neveihez, azonban 
 
 Amennyiben kész, szervezd ki a beszúrást egy külön metódusba!
 
+## További egyszerű műveletek JPA-val
+
+A `main()` metódusban próbáld ki a listázást, beolvasást id alapján, módosítást és törlést!
+
 ## Architektúra és integrációs tesztelés
 
 Hozz létre egy `ActivityDao` osztályt a következő metódusokkal:
 
 * `void saveActivity(Activity)`
-* `Activity findActivityById(long id)`
 * `List<Activity> listActivities()`
+* `Activity findActivityById(long id)`
+* `void deleteActivity(long id)`
 
 Hozz létre egy integrációs tesztet!
 

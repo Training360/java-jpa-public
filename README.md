@@ -14,7 +14,8 @@
 
 ## JPA
 
-* Egyszerű mentés és lekérdezés JPA-val (`simple-jpa`)
+* Egyszerű mentés JPA-val (`simple-jpa`)
+* További egyszerű műveletek JPA-val
 * Architektúra és integrációs tesztelés (`architectures`)
 * Entitások konfigurálása (`config-entities`)
 * Elsődleges kulcs (`id-table`, `id-composite`)
