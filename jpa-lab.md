@@ -51,9 +51,9 @@ Hozz létre egy integrációs tesztet!
 
 Módosítsd úgy az `Activity` osztályt, hogy ne a `type` sorszáma, hanem a neve kerüljön az adatbázisban elmentésre!
 
-Módosítsd úgy az oszlopok konfigurációját, hogy a `startTime`, `desc` és `type` is kötelező legyen (nem lehet `null`)!
+Módosítsd úgy az oszlopok konfigurációját, hogy a `startTime`, `description` és `type` is kötelező legyen (nem lehet `null`)!
 
-A `desc` mező hossza maximum 200 karakter lehet, a `type` mező hossza maximum 20 karakter.
+A `description` mező hossza maximum 200 karakter lehet, a `type` mező hossza maximum 20 karakter.
 
 ## Azonosítógenerálás
 
@@ -69,7 +69,7 @@ az aktuális időre! Módosítás esetén a Hibernate automatikusan állítsa be
 Írj a dao-ba egy metódust:
 
 ```java
-void updateActivity(long id, String desc)
+void updateActivity(long id, String description)
 ```
 
 Ez módosítsa az adott azonosítójú aktivitás leírását a második paraméterként megadottra! Ezzel ellenőrizheted, hogy
@@ -160,7 +160,7 @@ Hozz létre benne egy `Activity` entitást a következő mezőkkel:
 
 * `id` - egyedi azonosító, egész szám
 * `startTime` - kezdési idő, `LocalDateTime`
-* `desc` - szöveges leírás
+* `description` - szöveges leírás
 
 Hozz létre két leszármazottat: `SimpleActivity` és `ActivityWithTrack`.
 
