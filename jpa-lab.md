@@ -55,7 +55,7 @@ Módosítsd úgy az oszlopok konfigurációját, hogy a `startTime`, `descriptio
 
 A `description` mező hossza maximum 200 karakter lehet, a `type` mező hossza maximum 20 karakter.
 
-## Azonosítógenerálás
+## Elsődleges kulcs
 
 Módosítsd az `Activity` osztályt, hogy ne `auto_increment` mező alapján történjen az azonosítókiosztás, hanem a Hibernate
 saját táblája alapján! Legyen a tábla neve `act_id_gen`, mezői rendre `id_gen` és `id_val`!
