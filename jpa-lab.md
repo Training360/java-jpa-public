@@ -204,10 +204,24 @@ List<Object[]> findTrackPointCountByActivity()
 public void removeActivitiesByDateAndType(LocalDateTime afterThis, ActivityType type)
 ```
 
+# JPA használata Spring Frameworkkel
+
+Egy új projektbe másold át az osztályokat, és módosítsd úgy, hogy Spring Frameworkkel működjön!
+
 ## JPA Spring Boottal
 
 Egy új projektbe másold át az osztályokat, és módosítsd úgy, hogy Spring Boottal működjön!
 
+## Spring Data JPA
+
+Másold le a Spring Bootos projektet, és módosítsd, hogy Spring Data JPA repository legyen!
+
 ## JPA Java EE-vel
 
 Egy új projektbe másold át az osztályokat, és módosítsd úgy, hogy Java EE-t használva egy Wildfly alkalmazásszerveren belül működjön!
+
+## Deklaratív tranzakciókezelés
+
+Vagy a Spring Data JPA vagy a Java EE projektből indulj ki, és hozz létre egy `LogEntry`
+entitást, valamint hozzá egy repository-t, DAO-t. Activity mentése esetén hívd meg
+a `LogEntryDao`-t úgy, hogy mentsen el egy `LogEntry`-t, külön tranzakcióban.
