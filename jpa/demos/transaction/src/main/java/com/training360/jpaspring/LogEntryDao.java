@@ -1,6 +1,5 @@
 package com.training360.jpaspring;
 
-import com.mysql.jdbc.log.Log;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

@@ -1,6 +1,5 @@
 package com.training360.jpaspring;
 
-import com.mysql.jdbc.log.Log;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Sql(statements = {"delete from employees", "delete from log_entry"})
 public class EmployeeDaoTest {
 
     @Autowired
