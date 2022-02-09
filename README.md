@@ -10,6 +10,9 @@
 * Blob (`blob`)
 * Adatbázis metaadatok (`metadata`)
 * Haladó ResultSet (`advancedrs`)
+
+## Spring JdbcTemplate
+
 * Spring JdbcTemplate (`spring`)
 
 ## JPA
@@ -23,14 +26,17 @@
 * Többértékű attribútumok (`element-collection`)
 * Kapcsolatok (`relationships`)
 * Több-több kapcsolat (`many-to-many`)
-* Entitások MAP-ekben (`map`)
+* Entitások Mapekben (`map`)
 * Beágyazott objektumok és másodlagos tábla (`embedded`)
 * Öröklődés (`inheritance`)
 * Lekérdezések (`queries`)
 * Haladó lekérdezések
 * Bulk műveletek (`bulk`)
-* JPA használata Spring Frameworkkel
-* JPA Spring Boot-tal (`springboot`)
-* Spring Data
-* JPA Java EE-vel (`javaee`)
+
+## JPA használata más keretrendszerekben
+
+* JPA használata Spring Frameworkkel (`spring-jpa`)
+* Spring Data JPA (`spring-data-jpa`)
+* JPA Spring Boottal (`springboot`)
 * Deklaratív tranzakciókezelés (`transaction`)
+* JPA Java EE-vel (`javaee`)
