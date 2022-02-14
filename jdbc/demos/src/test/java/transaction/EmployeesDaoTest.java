@@ -1,29 +1,28 @@
 package transaction;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EmployeesDaoTest {
+class EmployeesDaoTest {
 
-    private EmployeesDao employeesDao;
+    EmployeesDao employeesDao;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/employees?useUnicode=true");
         dataSource.setUser("employees");
         dataSource.setPassword("employees");
 
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(dataSource);
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
@@ -32,14 +31,14 @@ public class EmployeesDaoTest {
     }
 
     @Test
-    public void testCreateEmployees() {
+    void testCreateEmployees() {
         employeesDao.createEmployees(Arrays.asList("Jack Doe", "Jane Doe", "Joe Doe"));
         List<String> names = employeesDao.listEmployeeNames();
         assertEquals(Arrays.asList("Jack Doe", "Jane Doe", "Joe Doe"), names);
     }
 
     @Test
-    public void testCreateEmployeesRollback() {
+    void testCreateEmployeesRollback() {
         employeesDao.createEmployees(Arrays.asList("Jack Doe", "Jane Doe", "xJoe Doe"));
         List<String> names = employeesDao.listEmployeeNames();
         assertEquals(Collections.emptyList(), names);

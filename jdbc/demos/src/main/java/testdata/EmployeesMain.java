@@ -1,4 +1,4 @@
-package transaction;
+package testdata;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
@@ -15,7 +15,7 @@ public class EmployeesMain {
 
         Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
-        flyway.clean();
+//        flyway.clean();
         flyway.migrate();
 
         EmployeesDao employeesDao = new EmployeesDao(dataSource);

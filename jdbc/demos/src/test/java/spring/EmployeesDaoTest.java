@@ -1,4 +1,4 @@
-package architecture;
+package spring;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,9 +30,18 @@ class EmployeesDaoTest {
     }
 
     @Test
-    void testInsert() {
+    void testCreateThanList() {
         employeesDao.createEmployee("John Doe");
-        assertEquals(Arrays.asList("John Doe"), employeesDao.listEmployeeNames());
+        List<String> employees = employeesDao.listEmployeeNames();
+
+        assertEquals(Arrays.asList("John Doe"), employees);
     }
 
+    @Test
+    void testThanFind() {
+        long id = employeesDao.createEmployee("John Doe");
+        System.out.println(id);
+        String name = employeesDao.findEmployeeNameById(id);
+        assertEquals("John Doe", name);
+    }
 }

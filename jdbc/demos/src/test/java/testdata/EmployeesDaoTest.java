@@ -1,4 +1,4 @@
-package architecture;
+package testdata;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
@@ -26,12 +26,21 @@ class EmployeesDaoTest {
         flyway.migrate();
 
         employeesDao = new EmployeesDao(dataSource);
+
+        employeesDao.createEmployee("John Doe");
+
+
     }
 
     @Test
     void testInsert() {
-        employeesDao.createEmployee("John Doe");
         assertEquals(Arrays.asList("John Doe"), employeesDao.listEmployeeNames());
+    }
+
+    @Test
+    void testInsertTwo() {
+        employeesDao.createEmployee("Jack Doe");
+        assertEquals(Arrays.asList("Jack Doe", "John Doe"), employeesDao.listEmployeeNames());
     }
 
 }

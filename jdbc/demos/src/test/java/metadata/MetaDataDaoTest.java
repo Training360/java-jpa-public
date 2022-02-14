@@ -1,27 +1,26 @@
 package metadata;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MetaDataDaoTest {
+class MetaDataDaoTest {
 
-    private MetaDataDao metaDataDao;
+    MetaDataDao metaDataDao;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/employees?useUnicode=true");
         dataSource.setUser("employees");
         dataSource.setPassword("employees");
 
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(dataSource);
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
@@ -30,10 +29,10 @@ public class MetaDataDaoTest {
     }
 
     @Test
-    public void testTableNames() {
+    void testTableNames() {
         List<String> names = metaDataDao.getTableNames();
         System.out.println(names);
 
-        assertTrue("Contains employees table", names.contains("employees"));
+        assertTrue(names.contains("employees"), "Contains employees table");
     }
 }

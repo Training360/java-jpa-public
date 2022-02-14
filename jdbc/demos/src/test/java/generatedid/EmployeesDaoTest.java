@@ -1,27 +1,24 @@
 package generatedid;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.Assert.assertEquals;
+class EmployeesDaoTest {
 
-public class EmployeesDaoTest {
+    EmployeesDao employeesDao;
 
-    private EmployeesDao employeesDao;
-
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/employees?useUnicode=true");
         dataSource.setUser("employees");
         dataSource.setPassword("employees");
 
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(dataSource);
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
@@ -30,7 +27,7 @@ public class EmployeesDaoTest {
     }
 
     @Test
-    public void testById() {
+    void testById() {
         long id = employeesDao.createEmployee("Jack Doe");
         System.out.println(id);
         id = employeesDao.createEmployee("Jane Doe");

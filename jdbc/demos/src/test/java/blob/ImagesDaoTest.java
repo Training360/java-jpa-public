@@ -1,29 +1,28 @@
 package blob;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.flywaydb.core.Flyway;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ImagesDaoTest {
+class ImagesDaoTest {
 
-    private ImagesDao imagesDao;
+    ImagesDao imagesDao;
 
-    @Before
-    public void init() {
+    @BeforeEach
+    void init() {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/employees?useUnicode=true");
         dataSource.setUser("employees");
         dataSource.setPassword("employees");
 
-        Flyway flyway = new Flyway();
-        flyway.setDataSource(dataSource);
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
 
         flyway.clean();
         flyway.migrate();
@@ -32,7 +31,7 @@ public class ImagesDaoTest {
     }
 
     @Test
-    public void saveImage() throws IOException {
+    void saveImage() throws IOException {
         imagesDao.saveImage("training360.gif",
                 ImagesDaoTest.class.getResourceAsStream("/training360.gif"));
 
@@ -42,6 +41,6 @@ public class ImagesDaoTest {
             is.transferTo(baos);
         }
 
-        assertTrue("File size", baos.size() > 3000);
+        assertTrue(baos.size() > 3000, "File size");
     }
 }
