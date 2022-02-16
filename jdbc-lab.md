@@ -27,7 +27,7 @@ Ekkor létrejön az `activitytracker` séma, és az `activitytracker` felhaszná
 * `type` - felsorolásos típus, mely felveheti a következő értékeket: `BIKING`, `HIKING`, `RUNNING`, `BASKETBALL`
 
 Írj egy `activitytracker.ActivityTrackerMain` osztályt, mely egy `main()` metódusban, mely példányosít pár `Activity`
-példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisban hozd létre az `activities` táblát! Az `id` legyen `auto_generated`!
+példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisban hozd létre az `activities` táblát! Az `id` legyen `auto_increment`!
 A mezőnevek legyenek hasonlóak az osztály attribútumainak neveihez, azonban a szavakat aláhúzásjel (`_`) válassza el!
 Mivel a `desc` és a `type` foglalt szó, ezért ezen oszlopok neve legyen `activity_desc` és `activity_type`.
 
