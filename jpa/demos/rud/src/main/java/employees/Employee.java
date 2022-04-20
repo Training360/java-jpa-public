@@ -1,8 +1,6 @@
-package jpa;
+package employees;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.*;
 
 @Entity
 @Table(name = "employees")
@@ -12,7 +10,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "emp_name",length = 200, nullable = false)
+    @Column(name = "emp_name")
     private String name;
 
     public Employee() {
