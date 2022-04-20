@@ -27,7 +27,8 @@ Ekkor létrejön az `activitytracker` séma, és az `activitytracker` felhaszná
 * `type` - felsorolásos típus, mely felveheti a következő értékeket: `BIKING`, `HIKING`, `RUNNING`, `BASKETBALL`
 
 Írj egy `activitytracker.ActivityTrackerMain` osztályt, mely egy `main()` metódusban, mely példányosít pár `Activity`
-példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisban hozd létre az `activities` táblát! Az `id` legyen `auto_generated`!
+példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisban hozd létre az `activities` táblát! Az `id` értékét 
+az adatbázis automatikusan generálja számunkra (`GenerationType.IDENTITY`)!
 A mezőnevek legyenek hasonlóak az osztály attribútumainak neveihez, azonban a szavakat aláhúzásjel (`_`) válassza el!
 
 Amennyiben kész, szervezd ki a beszúrást egy külön metódusba!
@@ -98,7 +99,7 @@ Az aktivitásokhoz pontokat is lehet felvinni, ha pl. GPS-szel nyomon követtük
 
 * `id` - egyedi azonosító
 * `time` - `LocalDate`
-* `lat` és `lon` - koordináták, szélességi és hosszúsági fok
+* `latitude` és `longitude` - koordináták, szélességi és hosszúsági fok
 
 Az `Activity` tartalmazzon egy `List<TrackPoint>` attribútumot!
 
@@ -178,14 +179,14 @@ Vizsgáld meg, hogy lehet az öröklődést konfigurálni!
 ## Lekérdezések
 
 Hozz létre egy metódust, mely azon aktivitásokhoz tartozó pontok koordinátáit
-adja vissza, melyek egy megadott dátum 2018-01-01 után történtek.
-Lehessen lapozást megadni. A lekérdezést named query-ben add meg!
+adja vissza, melyek a paraméterként megadott dátum után történtek!
+Lehessen lapozást megadni! A lekérdezést named query-ben add meg!
 
 ```java
 List<Coordinate> findTrackPointCoordinatesByDate(LocalDateTime afterThis, int start, int max)
 ```
 
-Ehhez hozz létre egy `Coordinate` DTO-t, melynek egy `lat` és `lon`
+Ehhez hozz létre egy `Coordinate` DTO-t, melynek egy `latitude` és `longitude`
 attribútuma van!
 
 ## Haladó lekérdezések
