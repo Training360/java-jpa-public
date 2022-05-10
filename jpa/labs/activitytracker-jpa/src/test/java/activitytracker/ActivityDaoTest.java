@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -105,9 +104,9 @@ class ActivityDaoTest {
     @Test
     void testFindActivityByIdWithTrackPoints() {
         Activity activity = new Activity(LocalDateTime.of(2022, 4, 11, 6, 0), "morning running", ActivityType.RUNNING);
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 47.497912, 19.040235));
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 4, 5), -33.88223, 151.33140));
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 4), 48.87376, 2.25120));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 47.497912, 19.040235));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 4, 5, 7, 4), -33.88223, 151.33140));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 4, 8, 5), 48.87376, 2.25120));
         activityDao.saveActivity(activity);
 
         Activity expected = activityDao.findActivityByIdWithTrackPoints(activity.getId());
@@ -133,16 +132,16 @@ class ActivityDaoTest {
     @Test
     void testFindTrackPointCoordinatesByDate() {
         Activity wrongActivity = new Activity(LocalDateTime.of(2017, 4, 11, 16, 0), "evening running", ActivityType.RUNNING);
-        wrongActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 1, 1));
-        wrongActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 4, 5), 2, 2));
-        wrongActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 4), 3, 3));
-        wrongActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 4), 4, 4));
+        wrongActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 1, 1));
+        wrongActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 4, 5, 7, 4), 2, 2));
+        wrongActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 4, 8, 5), 3, 3));
+        wrongActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 4, 9, 6), 4, 4));
         activityDao.saveActivity(wrongActivity);
         Activity rightActivity = new Activity(LocalDateTime.of(2022, 4, 11, 6, 0), "morning running", ActivityType.RUNNING);
-        rightActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 47.497912, 19.040235));
-        rightActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 4, 5), 33.88223, 151.33140));
-        rightActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 4), 48.87376, 2.25120));
-        rightActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 5), 23.87376, 4.25120));
+        rightActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 47.497912, 19.040235));
+        rightActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 4, 5, 7, 4), 33.88223, 151.33140));
+        rightActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 4, 8, 5), 48.87376, 2.25120));
+        rightActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 5, 9, 6), 23.87376, 4.25120));
         activityDao.saveActivity(rightActivity);
 
         List<Coordinate> expected = activityDao.findTrackPointCoordinatesByDate(LocalDateTime.of(2018, 1, 1, 0, 0), 1, 2);
@@ -155,18 +154,18 @@ class ActivityDaoTest {
     @Test
     void testFindTrackPointCountByActivity() {
         Activity activity = new Activity(LocalDateTime.of(2022, 4, 11, 6, 0), "morning running", ActivityType.RUNNING);
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 47.497912, 19.040235));
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 4, 5), -33.88223, 151.33140));
-        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 3, 4), 48.87376, 2.25120));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 47.497912, 19.040235));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 4, 5, 7, 4), -33.88223, 151.33140));
+        activity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 3, 4, 8, 5), 48.87376, 2.25120));
         activityDao.saveActivity(activity);
 
         Activity secondActivity = new Activity(LocalDateTime.of(2022, 3, 14, 17, 30), "evening running", ActivityType.RUNNING);
-        secondActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 47.497912, 19.040235));
-        secondActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 4, 5), -33.88223, 151.33140));
+        secondActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 47.497912, 19.040235));
+        secondActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 4, 5, 7, 4), -33.88223, 151.33140));
         activityDao.saveActivity(secondActivity);
 
         Activity thirdActivity = new Activity(LocalDateTime.of(2022, 4, 9, 10, 15), "hiking near Budapest", ActivityType.HIKING);
-        thirdActivity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 2, 3), 47.497912, 19.040235));
+        thirdActivity.addTrackPoint(new TrackPoint(LocalDateTime.of(2021, 2, 3, 6, 3), 47.497912, 19.040235));
         activityDao.saveActivity(thirdActivity);
 
         List<Object[]> expected = activityDao.findTrackPointCountByActivity();

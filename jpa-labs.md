@@ -98,7 +98,7 @@ Az aktivitásokhoz pontokat is lehet felvinni, ha pl. GPS-szel nyomon követtük
 Írj egy `TrackPoint` osztályt (entitást), melynek attribútumai:
 
 * `id` - egyedi azonosító
-* `time` - `LocalDate`
+* `time` - `LocalDateTime`
 * `latitude` és `longitude` - koordináták, szélességi és hosszúsági fok
 
 Az `Activity` tartalmazzon egy `List<TrackPoint>` attribútumot!
