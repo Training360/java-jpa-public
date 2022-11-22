@@ -31,7 +31,7 @@ példányt, és értéküket beszúrja az `activities` táblába! Az adatbázisb
 A mezőnevek legyenek hasonlóak az osztály attribútumainak neveihez, azonban a szavakat aláhúzásjel (`_`) válassza el!
 Mivel a `type` foglalt szó, ezért ezen oszlop neve legyen `activity_type`!
 
-A `LocalDateTime` értéket JDBC-vel a `ResultSet.setTimestamp()` metódussal lehet beszúrni. Létrehozni a 
+A `LocalDateTime` értéket JDBC-vel a `PreparedStatement` `setTimestamp()` metódusával lehet beszúrni. Létrehozni a 
 `Timestamp.valueOf(LocalDateTime)` metódussal lehet.
 
 Amennyiben kész, szervezd ki a beszúrást egy külön metódusba!
