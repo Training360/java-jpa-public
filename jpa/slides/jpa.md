@@ -778,7 +778,7 @@ public class Employee {
 
 * Eager: betölti a kapcsolódó entitást (entitásokat)
 * Lazy: csak szükség esetén tölti be a kapcsolódó entitásokat
-* `@ElementCollection` esetén is, alapesetben eager
+* `@ElementCollection` esetén is, alapesetben lazy
 * `@OneToOne` és `@ManyToOne` alapesetben eager
 * `@OneToMany` és `@ManyToMany` alapesetben lazy
 * Felülbírálása a `fetch` attribútummal 	
@@ -1199,7 +1199,7 @@ List<Employee> employees = entityManager
 ## Named query definiálás futásidőben
 
 ```java
-TypeQuery<Employee> q = em.createQuery("select e from Employee e order by e.name", Employee.class);
+TypedQuery<Employee> q = em.createQuery("select e from Employee e order by e.name", Employee.class);
 entityManagerFactory.addNamedQuery("findEmployees", q);
 ```
 
@@ -1241,7 +1241,7 @@ List<EmployeeData> employees = entityManager
 ## Query timeout
 
 ```java
-TypeQuery<Employee> q = em.createQuery("select e from Employee e order by e.name", Employee.class);
+TypedQuery<Employee> q = em.createQuery("select e from Employee e order by e.name", Employee.class);
 q.setHint("javax.persistence.query.timeout", 5000);
 ```
 
