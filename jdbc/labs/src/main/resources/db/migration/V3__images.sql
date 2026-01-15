@@ -1,1 +1,0 @@
-CREATE TABLE images (id INT, filename VARCHAR(250), content BLOB, FOREIGN KEY (id) REFERENCES activities(id));

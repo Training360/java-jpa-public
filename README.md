@@ -1,19 +1,4 @@
-# Perzisztencia, adatbázis programozás JDBC és JPA technológiákkal
-
-## JDBC 
-
-* Egyszerű JDBC adatmódosítás (`simpleupdate`)
-* Egyszerű JDBC lekérdezés (`simplequery`)
-* Alkalmazás architektúra (`architecture`)
-* Generált azonosító lekérdezése (`generatedid`)
-* Tranzakciókezelés (`transaction`)
-* Blob (`blob`)
-* Adatbázis metaadatok (`metadata`)
-* Haladó ResultSet (`advancedrs`)
-
-## Spring JdbcTemplate
-
-* Spring JdbcTemplate (`spring`)
+# Perzisztencia, adatbázis programozás JPA technológiával
 
 ## JPA
 
