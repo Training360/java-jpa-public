@@ -17,11 +17,3 @@
 * Lekérdezések (`queries`)
 * Haladó lekérdezések
 * Bulk műveletek (`bulk`)
-
-## JPA használata más keretrendszerekben
-
-* JPA használata Spring Frameworkkel (`spring-jpa`)
-* Spring Data JPA (`spring-data-jpa`)
-* JPA Spring Boottal (`springboot`)
-* Deklaratív tranzakciókezelés (`transaction`)
-* JPA Java EE-vel (`javaee`)
